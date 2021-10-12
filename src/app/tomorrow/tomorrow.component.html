@@ -1,0 +1,35 @@
+<mat-grid-list cols="4" rowHeight="70%">
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile colspan="2">
+    <mat-card class="tomorrow-card">
+        <mat-card-header>
+          <div mat-card-avatar *ngIf="weatherData" 
+          style="background-size: cover;background-image: url('http://openweathermap.org/img/wn/{{weatherData.daily[1].weather[0].icon}}@2x.png');"
+          ></div>
+          <div mat-card-avatar *ngIf="!weatherData"><mat-spinner diameter="30"></mat-spinner></div>
+          <mat-card-title *ngIf="weatherData">{{ weatherData.daily[1].temp.day | number: '1.1-1' }} °C - {{ weatherData.daily[1].weather[0].main }}</mat-card-title>
+          <mat-card-subtitle *ngIf="weatherData">Tomorrow, {{ weatherData.daily[1].dt * 1000 | date }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <span *ngIf="weatherData">
+            <div>
+                Temperature : {{ weatherData.daily[1].temp.day }} °C
+              </div>
+              <div>
+                Sunrise : {{ weatherData.daily[1].sunrise * 1000 | date :'shortTime' }}
+              </div>
+              <div>
+                Sunset :{{ weatherData.daily[1].sunset * 1000 | date :'shortTime' }}
+              </div>
+              <div>
+                Pressure : {{ weatherData.daily[1].pressure }}
+              </div>
+              <div>
+                Humidity : {{weatherData.daily[1].humidity}}
+              </div>
+          </span>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>

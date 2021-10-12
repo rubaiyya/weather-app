@@ -1,0 +1,21 @@
+.horizontal-mat-list-item {
+    float: right;
+    display: contents !important;
+    }
+
+    .centered-mat-list-item {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+            /* Column | row */
+    }
+
+    .wrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 10px;
+      }

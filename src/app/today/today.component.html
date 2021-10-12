@@ -1,0 +1,64 @@
+<mat-grid-list cols="4" rowHeight="90%">
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile colspan="2">
+    <mat-card class="today-card">
+        <mat-card-header>
+          <div mat-card-avatar *ngIf="weatherData" 
+          style="background-size: cover;background-image: url('http://openweathermap.org/img/wn/{{weatherData.current.weather[0].icon}}@2x.png');"
+          >
+          </div>
+          <div mat-card-avatar *ngIf="!weatherData"><mat-spinner diameter="30"></mat-spinner></div>
+          <mat-card-title *ngIf="weatherData">{{ weatherData.current.temp | number: '1.1-1' }} °C - {{ weatherData.current.weather[0].main }}</mat-card-title>
+          <mat-card-subtitle *ngIf="weatherData">Today, {{ weatherData.current.dt * 1000 | date }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div style="width: 500px; height: 150px;">
+            <div *ngIf="weatherData" style="width: 100%; height: 100%; ">
+              <ngx-charts-area-chart
+                [view]="[500, 200]"
+                [scheme]="colorScheme"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxis]="xAxis"
+                [yAxis]="yAxis"
+                [timeline]="timeline"
+                [results]="seriesData">
+              </ngx-charts-area-chart>
+            </div>
+          </div>
+          <div *ngIf="weatherData" style="width: 500px;height: 100px;">
+            <mat-grid-list cols="3"  rowHeight="3:1%">
+              <mat-grid-tile>
+            <div>
+              Feels like : {{ weatherData.current.feels_like | number: '1.1-1' }} °C
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div>
+              <mat-icon aria-hidden="false" aria-label="Example home icon">brightness_7</mat-icon>
+                 {{ weatherData.current.sunrise * 1000 | date :'shortTime' }}
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div>
+              <mat-icon aria-hidden="false" aria-label="Example home icon">dark_mode</mat-icon>
+                {{ weatherData.current.sunset * 1000 | date :'shortTime' }}
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div>
+              Pressure : {{ weatherData.current.pressure }}
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div>
+              Humidity : {{weatherData.current.humidity}}
+            </div>
+          </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>
